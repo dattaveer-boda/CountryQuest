@@ -1969,7 +1969,7 @@
   --status-background: #edf7f1;
   display: grid;
   min-width: 0;
-  grid-template-rows: 64px 84px minmax(18px, auto) auto 34px;
+  grid-template-rows: 64px 84px auto auto auto 34px;
   align-items: center;
   justify-items: center;
   gap: 6px;
@@ -2075,6 +2075,14 @@
   font-size: 12px;
   line-height: 1.4;
   color: #768298;
+  overflow-wrap: anywhere;
+}
+
+.flag-learning-capital {
+  max-width: 100%;
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--flag-ink);
   overflow-wrap: anywhere;
 }
 

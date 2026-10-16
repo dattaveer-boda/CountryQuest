@@ -13,6 +13,7 @@ let worldColors
 let worldCountries
 let worldGeography
 let getCountryStatus
+let getCountryFacts
 
 // Vite loads the same TypeScript and JSON imports used by the browser application.
 before(async () => {
@@ -24,6 +25,7 @@ before(async () => {
   worldGeography = colorsModule.WORLD_GEOGRAPHY
   getCountryCode = (await server.ssrLoadModule('/src/geography.ts')).getCountryCode
   getCountryStatus = (await server.ssrLoadModule('/src/countryStatus.ts')).getCountryStatus
+  getCountryFacts = (await server.ssrLoadModule('/src/countryFacts.ts')).getCountryFacts
 })
 
 after(async () => {
@@ -144,4 +146,8 @@ test('a graph needing more than six colors gets extra colors instead of conflict
   const colors = createCountryColors(crowded)
   assert.equal(Object.keys(colors).length, ids.length)
   assert.equal(new Set(Object.values(colors)).size, ids.length)
+})
+
+test('Equatorial Guinea uses Ciudad de la Paz as its capital', () => {
+  assert.equal(getCountryFacts('GNQ').capitals, 'Ciudad de la Paz')
 })

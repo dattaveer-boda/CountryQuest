@@ -2,6 +2,9 @@ import countryData from 'world-countries'
 
 // Index the bundled dataset once; every panel lookup then uses the same alpha-3 key.
 const factsByCode = new Map(countryData.map((country) => [country.cca3, country]))
+const capitalOverridesByCode: Record<string, string> = {
+  GNQ: 'Ciudad de la Paz',
+}
 
 // Landmark examples are curated locally, not supplied by world-countries.
 const monumentsByCode: Record<string, string[]> = {
@@ -166,7 +169,7 @@ const monumentsByCode: Record<string, string[]> = {
 export function getCountryFacts(code: string) {
   const country = factsByCode.get(code)
   return {
-    capitals: country?.capital.join(', ') || 'Not listed',
+    capitals: capitalOverridesByCode[code] ?? (country?.capital.join(', ') || 'Not listed'),
     currencies: country ? Object.entries(country.currencies)
       .map(([currencyCode, currency]) => `${currency.name} (${currencyCode})`).join(', ') || 'Not listed' : 'Not listed',
     languages: code === 'IND' ? 'Hindi, English'

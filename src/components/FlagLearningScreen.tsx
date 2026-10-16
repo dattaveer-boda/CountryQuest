@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { ArrowRight, Eye, Flag, RotateCcw, Search } from 'lucide-react'
+import { getCountryFacts } from '../countryFacts'
 import { CONTINENT_VIEWS } from '../geography'
 import { getCountryStatus } from '../countryStatus'
 import type { Country } from '../types/game'
@@ -94,6 +95,7 @@ export default function FlagLearningScreen({ countries, onStartQuiz }: FlagLearn
           {filteredCountries.map((country, index) => {
             const nameVisible = !hideNames || revealedCodes.includes(country.code)
             const status = getCountryStatus(country.code)
+            const capital = getCountryFacts(country.code).capitals
             return (
               <article key={country.code} className={`flag-learning-country is-${status.kind}`}>
                 <button
@@ -105,6 +107,7 @@ export default function FlagLearningScreen({ countries, onStartQuiz }: FlagLearn
                 ><CountryFlag country={country} /></button>
                 <span className="flag-learning-name" aria-live="polite">{nameVisible ? country.name : <Eye size={19} aria-hidden="true" />}</span>
                 <span className="flag-learning-continent">{country.continents.join(' & ') || 'Not listed'}</span>
+                <span className="flag-learning-capital">Capital: {capital}</span>
                 <div className="flag-learning-status">
                   <span className="flag-status-label">{status.label}</span>
                   <span className="flag-status-detail">{status.detail}</span>

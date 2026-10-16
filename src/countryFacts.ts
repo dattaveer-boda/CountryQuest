@@ -1,7 +1,9 @@
 import countryData from 'world-countries'
 
+// Index the bundled dataset once; every panel lookup then uses the same alpha-3 key.
 const factsByCode = new Map(countryData.map((country) => [country.cca3, country]))
 
+// Landmark examples are curated locally, not supplied by world-countries.
 const monumentsByCode: Record<string, string[]> = {
   AFG: ['Minaret of Jam', 'Babur Gardens'],
   ALB: ['Berat Castle', 'Butrint'],
@@ -63,7 +65,7 @@ const monumentsByCode: Record<string, string[]> = {
   HND: ['Copan'],
   HUN: ['Hungarian Parliament Building', 'Buda Castle'],
   ISL: ['Hallgrimskirkja'],
-  IND: ['Taj Mahal', 'Red Fort', 'Qutub Minar', 'Gateway of India'],
+  IND: ['Kailasa Temple, Ellora', 'Brihadeeswarar Temple, Thanjavur', 'Meenakshi Temple, Madurai', 'Konark Sun Temple, Konark', 'Hawa Mahal, Jaipur', 'Taj Mahal, Agra'],
   IDN: ['Borobudur', 'Prambanan', 'National Monument'],
   IRN: ['Persepolis', 'Azadi Tower'],
   IRQ: ['Great Ziggurat of Ur', 'Al-Malwiya Minaret'],
